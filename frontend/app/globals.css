@@ -1,0 +1,93 @@
+/* ------------------------------------------------------------------
+   Coffee Palace — brand tokens
+   Espresso and Palace Pink are sampled straight from the logo.
+------------------------------------------------------------------- */
+:root {
+  --espresso: #3b1805;
+  --espresso-deep: #230d02;
+  --cocoa: #7a4a33;
+  --latte: #c9a48c;
+
+  --palace-pink: #ffb1e3;
+  --pink-deep: #f48fcf;
+  --blush: #ffe3f3;
+  --blush-soft: #fff0f8;
+  --milk: #fff8fb;
+  --white: #ffffff;
+  --berry: #b0327f;
+
+  --amber: #f3b765;
+  --amber-soft: #fff1dc;
+  --mint: #8fd6a8;
+  --mint-soft: #e3f6ea;
+  --danger: #c23a3a;
+  --danger-soft: #fde8e8;
+
+  --font-round: "Fredoka Variable", "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-ui: "Figtree Variable", "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-pill: 999px;
+  --ring: 0 0 0 3px var(--white), 0 0 0 6px var(--berry);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--milk);
+  color: var(--espresso);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

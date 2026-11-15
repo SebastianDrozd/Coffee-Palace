@@ -1,0 +1,55 @@
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--blush);
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--espresso);
+  touch-action: manipulation;
+  transition: transform 80ms ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.88);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+}
+
+.qty {
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.md .btn {
+  width: 44px;
+  height: 44px;
+}
+.md .btn svg {
+  width: 20px;
+  height: 20px;
+}
+.md .qty {
+  min-width: 30px;
+  font-size: 1.25rem;
+}
+
+.lg .btn {
+  width: 56px;
+  height: 56px;
+}
+.lg .qty {
+  min-width: 40px;
+  font-size: 1.6rem;
+}

@@ -1,0 +1,166 @@
+.card {
+  --accent: var(--palace-pink);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 14px 20px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--dash-border);
+  overflow: hidden;
+}
+
+/* status stripe */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.new {
+  --accent: var(--pink-deep);
+}
+.preparing {
+  --accent: var(--amber);
+}
+.ready {
+  --accent: var(--mint);
+}
+
+.fresh {
+  animation: arrive 1.2s ease-out 2;
+}
+
+@keyframes arrive {
+  0% {
+    box-shadow: 0 0 0 0 rgb(244 143 207 / 0.75);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgb(244 143 207 / 0);
+  }
+}
+
+.head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.number {
+  font-family: var(--font-round);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placed {
+  font-size: 0.8rem;
+  color: var(--dash-muted);
+}
+
+.wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--dash-bg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--dash-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.wait svg {
+  width: 14px;
+  height: 14px;
+}
+
+.slow {
+  background: #fde2ef;
+  color: var(--berry);
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  font-size: 1rem;
+}
+
+.items li {
+  display: flex;
+  gap: 8px;
+}
+
+.qty {
+  min-width: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.note {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--amber-soft);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  border-left: 3px solid var(--amber);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--dash-border);
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.totalMain {
+  font-weight: 700;
+}
+
+.totalSub {
+  font-size: 0.82rem;
+  color: var(--dash-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}

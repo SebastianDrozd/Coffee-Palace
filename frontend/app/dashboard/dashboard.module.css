@@ -1,0 +1,27 @@
+.shell {
+  --dash-bg: #fbf7f9;
+  --dash-border: #eedde6;
+  --dash-muted: #876556;
+
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  min-height: 100dvh;
+  background: var(--dash-bg);
+  font-family: var(--font-ui);
+}
+
+.content {
+  min-width: 0;
+  padding: 32px 36px 48px;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .content {
+    padding: 20px 16px 40px;
+  }
+}

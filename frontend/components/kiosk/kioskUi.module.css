@@ -1,0 +1,70 @@
+/* Shared kiosk buttons: chunky, pressable, sized for fingers. */
+
+.btn {
+  --edge: var(--espresso-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 0 34px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-round);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 0 var(--edge);
+  transition: transform 90ms ease, box-shadow 90ms ease, opacity 120ms;
+  touch-action: manipulation;
+  text-decoration: none;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--edge);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--espresso);
+  color: var(--white);
+}
+
+.pink {
+  --edge: var(--pink-deep);
+  background: var(--palace-pink);
+  color: var(--espresso);
+}
+
+.soft {
+  --edge: #f2c4df;
+  background: var(--white);
+  color: var(--espresso);
+}
+
+.large {
+  min-height: 80px;
+  padding: 0 56px;
+  font-size: 1.7rem;
+}
+
+.block {
+  width: 100%;
+}
+
+.small {
+  min-height: 52px;
+  padding: 0 22px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 0 var(--edge);
+}
+
+.small:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--edge);
+}

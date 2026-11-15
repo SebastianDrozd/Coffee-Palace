@@ -1,0 +1,170 @@
+.tile {
+  --edge: #f6cbe4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 2px solid var(--edge);
+  border-radius: 28px;
+  background: var(--white);
+  color: inherit;
+  font-family: var(--font-round);
+  text-align: left;
+  box-shadow: 0 6px 0 var(--edge);
+  transition: transform 90ms ease, box-shadow 90ms ease, border-color 150ms;
+  touch-action: manipulation;
+}
+
+.tile:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--edge);
+}
+
+.inCart {
+  --edge: var(--pink-deep);
+}
+
+/* ---- media ---- */
+.photo,
+.nameOnly {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--blush);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No photo: the name is the picture */
+.nameOnly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  text-align: center;
+}
+
+.nameOnly::after {
+  content: "";
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 459 / 488;
+  right: -6%;
+  bottom: -10%;
+  background: var(--palace-pink);
+  opacity: 0.55;
+  transform: rotate(-14deg);
+  -webkit-mask: url("/brand/bean.png") center / contain no-repeat;
+  mask: url("/brand/bean.png") center / contain no-repeat;
+}
+
+.bigName {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.25rem, 1.6vw + 0.5rem, 1.7rem);
+  font-weight: 600;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+/* ---- text ---- */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  padding: 0 6px 4px;
+}
+
+.name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.desc {
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: var(--cocoa);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 44px;
+}
+
+/* Dollar price on top, bolívares underneath; each stays on one line */
+.price {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.priceMain {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.priceSub {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--cocoa);
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--palace-pink);
+  color: var(--espresso);
+}
+
+.badge svg {
+  width: 22px;
+  height: 22px;
+}
+
+.count {
+  background: var(--espresso);
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 600;
+  animation: bump 260ms ease-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

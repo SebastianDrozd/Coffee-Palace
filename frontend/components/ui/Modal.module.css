@@ -1,0 +1,97 @@
+.dialog {
+  border: none;
+  padding: 0;
+  max-height: calc(100dvh - 32px);
+  width: calc(100vw - 32px);
+  color: var(--espresso);
+  background: var(--white);
+  overflow: auto;
+}
+
+.dialog::backdrop {
+  background: rgb(59 24 5 / 0.45);
+}
+
+.dialog[open] {
+  animation: pop 180ms ease-out;
+}
+
+@keyframes pop {
+  from {
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+}
+
+.body {
+  min-width: 0;
+}
+
+.footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* ---- sizes ---- */
+.sm {
+  max-width: 440px;
+}
+.md {
+  max-width: 560px;
+}
+.lg {
+  max-width: 860px;
+}
+
+/* ---- dashboard look ---- */
+.dashboard {
+  border-radius: 18px;
+  font-family: var(--font-ui);
+  box-shadow: 0 24px 60px rgb(59 24 5 / 0.25);
+}
+.dashboard .inner {
+  padding: 24px;
+  gap: 18px;
+}
+.dashboard .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.dashboard .footer {
+  padding-top: 4px;
+}
+
+/* ---- kiosk look ---- */
+.kiosk {
+  border-radius: 36px;
+  font-family: var(--font-round);
+  text-align: center;
+  box-shadow: 0 10px 0 var(--pink-deep);
+}
+.kiosk .inner {
+  padding: 40px 36px 32px;
+  gap: 16px;
+}
+.kiosk .title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.kiosk .body {
+  font-size: 1.25rem;
+  color: var(--cocoa);
+}
+.kiosk .footer {
+  justify-content: center;
+  padding-top: 12px;
+}

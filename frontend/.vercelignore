@@ -1,0 +1,15 @@
+# Not uploaded to Vercel
+node_modules
+.next
+.env
+.env*.local
+
+# Old files, safe to delete. The top-level /api folder must never be uploaded:
+# Vercel turns every file in it into its own function, which breaks /api/* routes.
+/api
+app/api/categories
+app/api/products
+app/api/orders
+app/api/uploads
+app/api/exchange-rate
+lib/mockRoute.js

@@ -1,0 +1,102 @@
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 4vh, 40px);
+  padding: 32px 16px;
+  background: var(--palace-pink);
+  text-align: center;
+}
+
+.saucer {
+  position: relative;
+  width: min(44vmin, 380px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 clamp(10px, 1.6vmin, 16px) var(--blush),
+    0 14px 0 clamp(10px, 1.6vmin, 16px) var(--pink-deep);
+  animation: land 420ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+.check {
+  position: absolute;
+  top: -4%;
+  right: 2%;
+  display: grid;
+  place-items: center;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--espresso);
+  color: var(--white);
+  box-shadow: 0 0 0 8px var(--palace-pink);
+  animation: land 420ms 260ms cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+
+.check svg {
+  width: 56%;
+  height: 56%;
+}
+
+.numberLabel {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.4vmin, 1.6rem);
+  font-weight: 500;
+  color: var(--cocoa);
+}
+
+.number {
+  margin: 0;
+  font-size: clamp(4rem, 13vmin, 7.5rem);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes land {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vmin, 3.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.sub {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.6vmin, 1.6rem);
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.countdown {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}

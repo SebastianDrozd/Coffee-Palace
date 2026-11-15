@@ -1,0 +1,193 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 24px 16px;
+  background: var(--espresso);
+  color: #f7e4ee;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.name {
+  font-family: var(--font-round);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--palace-pink);
+}
+
+.tag {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.97rem;
+  opacity: 0.82;
+  transition: background 120ms, opacity 120ms;
+}
+
+.link svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.link:hover {
+  opacity: 1;
+  background: rgb(255 255 255 / 0.07);
+}
+
+.active,
+.active:hover {
+  opacity: 1;
+  background: var(--palace-pink);
+  color: var(--espresso);
+}
+
+.badge {
+  margin-left: auto;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--espresso);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.active .badge {
+  background: var(--espresso);
+  color: var(--white);
+}
+
+.foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.rate {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  margin: 0 -8px 4px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.07);
+  color: inherit;
+  text-decoration: none;
+}
+
+.rate:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.rateLabel {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.rateWarn {
+  color: var(--amber);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.rateValue {
+  font-family: var(--font-round);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--palace-pink);
+  font-variant-numeric: tabular-nums;
+}
+
+.clock {
+  font-family: var(--font-round);
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.6em;
+}
+
+.footLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  font-size: 0.875rem;
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+.footLink svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 12px 16px;
+  }
+
+  .tag,
+  .foot {
+    display: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .mark {
+    width: 36px;
+    height: 36px;
+  }
+}

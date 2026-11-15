@@ -1,0 +1,16 @@
+.kiosk {
+  min-height: 100dvh;
+  font-family: var(--font-round);
+  color: var(--espresso);
+  background: var(--milk);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+.kiosk input,
+.kiosk textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
