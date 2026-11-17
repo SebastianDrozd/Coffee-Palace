@@ -1,7 +1,11 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 
-dotenv.config({ quiet: true });
+// The backend folder, wherever it's started from (Terminal, pm2, ...)
+export const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+dotenv.config({ path: path.join(rootDir, ".env"), quiet: true });
 
 const env = process.env;
 const num = (value, fallback) => (value === undefined || value === "" ? fallback : Number(value));
@@ -17,13 +21,17 @@ export const config = {
     database: env.DB_NAME || "coffee_palace",
   },
 
+  // Only needed when the website is served from a different address than this API
   corsOrigins: (env.CORS_ORIGIN || "http://localhost:3000")
     .split(",")
     .map((o) => o.trim().replace(/\/$/, ""))
     .filter(Boolean),
 
-  uploadsDir: path.resolve(env.UPLOADS_DIR || "./uploads"),
+  uploadsDir: path.resolve(rootDir, env.UPLOADS_DIR || "uploads"),
   maxPhotoBytes: 10 * 1024 * 1024,
+
+  // The tablet + dashboard website (built from the frontend project), served at /
+  publicDir: path.resolve(rootDir, env.PUBLIC_DIR || "public"),
 
   timezone: env.BUSINESS_TIMEZONE || "America/Caracas",
 

@@ -98,6 +98,21 @@ Fonts are bundled with the app (no Google Fonts call), so the tablet works on a 
 The real backend is in `../backend` (Node.js + Express + MySQL/MariaDB). To use it, create `.env.local` here with
 `NEXT_PUBLIC_API_URL=http://localhost:4000/api` and restart. Setup steps are in `../backend/README.md`.
 
+## Shop install: the backend serves the website
+
+In the shop, this app doesn't run as a Next.js server. It's built once as plain files and the backend serves them on
+its own port (4000), with the API at `/api` on the same address. Nothing to configure, and it runs on old machines
+(the backend needs only Node 16; Next.js itself needs Node 20.9+).
+
+```bash
+npm run build:static              # builds into out/ and copies it to ../backend/public
+npm run build:static -- <folder>  # or copies it somewhere else
+```
+
+Run it on a computer with Node 20.9+ and with `npm run dev` stopped (the script moves `app/api` aside while it builds,
+because a static site can't contain API routes, and puts it back afterwards). Then copy `backend/public` to the shop
+server and restart the backend. `STATIC_EXPORT=1` in `next.config.mjs` switches on the static build.
+
 ## Stand-in API (used when NEXT_PUBLIC_API_URL isn't set)
 
 `app/api/[...path]/route.js` + `lib/mockApi.js` + `lib/mockDb.js` + `lib/mockRates.js` are an in-memory backend so the app
@@ -113,7 +128,7 @@ When the real backend is up:
    NEXT_PUBLIC_API_URL=http://192.168.1.50:4000/api
    ```
 2. Optionally delete `app/api/`, `lib/mockApi.js`, `lib/mockDb.js` and `lib/mockRates.js` (they're unused once the URL is set).
-3. Enable CORS on the Express server for the frontend's origin (`app.use(cors({ origin: "http://<frontend>:3000" }))`).
+3. Add the frontend's address to `CORS_ORIGIN` in `../backend/.env` (e.g. `http://192.168.1.50:3000`).
 
 All frontend calls go through `lib/api/client.js` → `lib/api/categories.js`, `lib/api/products.js`, `lib/api/orders.js`, `lib/api/exchangeRate.js`.
 

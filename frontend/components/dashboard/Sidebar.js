@@ -20,7 +20,7 @@ const NAV = [
 ];
 
 export default function Sidebar() {
-  const pathname = usePathname();
+  const pathname = usePathname().replace(/(.)\/$/, "$1"); // "/dashboard/" and "/dashboard" are the same page
   const now = useNow();
   const { data: orders } = useQuery({
     queryKey: orderKeys.active,

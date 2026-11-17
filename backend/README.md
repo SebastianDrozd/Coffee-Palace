@@ -1,14 +1,20 @@
 # Coffee Palace — backend
 
-Node.js + Express API for the Coffee Palace tablet and dashboard, with MySQL/MariaDB.
-Prices are saved in US dollars; bolívares are calculated with the official BCV rate, which the
-server reads from https://www.bcv.org.ve/ every hour.
+Node.js + Express server for the Coffee Palace tablet and dashboard, with MySQL/MariaDB.
+It serves **both the website and the API on one address** (port 4000): the tablet and dashboard pages are
+prebuilt plain files in `public/`, so no Next.js server is needed.
 
-Works with **XAMPP** (its "MySQL" is MariaDB 10.4+) and with **MySQL 8**. Needs **Node.js 20+**.
+Prices are saved in US dollars; bolívares are calculated with the official BCV rate, which the server reads from
+https://www.bcv.org.ve/ every hour.
+
+Works with **XAMPP** (its "MySQL" is MariaDB 10.4+) and with **MySQL 8**. Needs **Node.js 16 or newer**, so it runs on
+old Macs (macOS 10.13 High Sierra and up).
 
 ## Setup
 
-1. **Start MySQL** in the XAMPP Control Panel.
+On a Mac, read "Installing on a Mac" below first.
+
+1. **Start MySQL** in XAMPP (Windows: XAMPP Control Panel; Mac: manager-osx → *Manage Servers*).
 2. **Create the tables:** in phpMyAdmin go to *Import*, choose `database/schema.sql`, click *Go*.
    For the sample menu, import `database/seed.sql` the same way.
    (Command line instead: `mysql -u root < database/schema.sql` then `mysql -u root < database/seed.sql`.)
@@ -17,38 +23,91 @@ Works with **XAMPP** (its "MySQL" is MariaDB 10.4+) and with **MySQL 8**. Needs 
 4. **Run:**
    ```bash
    npm install
-   npm start          # or: npm run dev   (restarts on file changes)
+   npm start
    ```
    You should see:
    ```
-   Coffee Palace API en http://localhost:4000/api
+   Coffee Palace en http://localhost:4000
+     Tablet:     http://192.168.1.50:4000
+     Dashboard:  http://192.168.1.50:4000/dashboard
    Base de datos: coffee_palace en 127.0.0.1:3306
    [tasa BCV] Bs. 891.1054 (fecha valor 2026-11-03)
    ```
-   Check http://localhost:4000/api/health, which should answer `{"ok":true}`.
-5. **Point the frontend at it:** in the `frontend` folder create `.env.local` with
-   ```
-   NEXT_PUBLIC_API_URL=http://localhost:4000/api
-   ```
-   and restart `npm run dev`. Without this line the frontend keeps using its built-in stand-in API.
+5. **Open it:** the tablet uses the *Tablet* address, the counter computer the *Dashboard* address
+   (on the server itself, http://localhost:4000 and http://localhost:4000/dashboard).
 
-## Running it in the shop (tablet + counter computer)
+## Running it in the shop
 
-The tablet's browser calls this API directly, so `localhost` won't work from the tablet.
-On the computer that runs both servers (say its IP is `192.168.1.50`):
+- The tablet and the counter computer must be on the **same Wi-Fi/network** as the server.
+- Give the server a **fixed IP** in the router so the tablet's address doesn't change.
+- Allow incoming connections to `node` (Mac: click *Allow* when asked; Windows Firewall: allow port 4000, private network).
+- Keep it running after closing the terminal and after a restart with pm2 (see the Mac section).
 
-- `frontend/.env.local`: `NEXT_PUBLIC_API_URL=http://192.168.1.50:4000/api`
-- `backend/.env`: `CORS_ORIGIN=http://192.168.1.50:3000,http://localhost:3000`
-- Rebuild the frontend after changing `NEXT_PUBLIC_API_URL` (`npm run build && npm start -- -H 0.0.0.0`):
-  Next.js bakes `NEXT_PUBLIC_*` values in at build time.
-- Allow ports **3000** and **4000** in Windows Firewall (private network).
-- Give that computer a fixed IP in the router so the tablet's address doesn't change.
+## Updating the website
+
+The pages in `public/` are built from the `frontend` folder. After changing the frontend, on a computer with
+**Node 20+** (not the old Mac), run in `frontend`:
+
+```bash
+npm run build:static          # builds and copies the site into ../backend/public
+```
+
+Then copy the new `public/` folder to the server and restart it (`pm2 restart coffee-palace`).
+The `frontend` folder is not needed on the server.
+
+## Installing on a Mac
+
+**Copy only the `backend` folder, without `node_modules`.** Then run `npm install` on the Mac.
+
+**Node.js:** macOS 10.13–10.14 can run at most **Node 16**: install
+https://nodejs.org/dist/v16.20.2/node-v16.20.2.pkg. On macOS 10.15 or newer, install the LTS from https://nodejs.org.
+
+**MySQL + phpMyAdmin:** any of these works with `schema.sql`. Only the connection details differ:
+
+| Package | `DB_PORT` | `DB_USER` / `DB_PASSWORD` (defaults) |
+| --- | --- | --- |
+| XAMPP for macOS | 3306 | `root` / *(empty)* |
+| MAMP | **8889** | `root` / `root` |
+| Homebrew `mysql` | 3306 | `root` / *(empty)* |
+
+**Files copied from another computer are "from an unidentified developer".** Clear that once for the whole folder,
+then create `.env` in Terminal (it's hidden in Finder):
+
+```bash
+cd ~/Documents/"Coffee Palace"/backend
+xattr -dr com.apple.quarantine .
+cp .env.example .env
+open -e .env        # or: nano .env
+```
+
+**The Mac's network IP:** `npm start` prints it, or `ipconfig getifaddr en0`.
+
+**Firewall:** if macOS asks whether `node` may accept incoming connections, click **Allow**, or the tablet can't connect.
+
+**Keep it awake:** if the Mac sleeps, the tablet and dashboard stop working. System Preferences → Energy Saver →
+turn on *Prevent computer from sleeping automatically when the display is off* (MacBook: on the *Power Adapter* tab,
+and keep it plugged in).
+
+**Keep it running** after closing Terminal and after a restart, with pm2 (version 5 works on Node 16; newer pm2 needs
+Node 18):
+
+```bash
+sudo npm install -g pm2@5
+cd ~/Documents/"Coffee Palace"/backend
+pm2 start server.js --name coffee-palace
+pm2 save
+pm2 startup        # prints one sudo command: copy, paste and run it
+```
+
+`pm2 status` shows it, `pm2 logs` shows its output, `pm2 restart coffee-palace` restarts it.
+After a restart of the Mac, start MySQL in XAMPP (or set it to start automatically there).
 
 ## What's where
 
 ```
-server.js                 starts the API and the hourly BCV check
-app.js                    Express app: CORS, JSON, photos, routes, errors
+server.js                 starts the server and the hourly BCV check
+app.js                    Express app: CORS, JSON, photos, API routes, website, errors
+public/                   the website (built from the frontend with npm run build:static)
 configs/                  config.js (.env), db.js (connection pool, transactions)
 routes/                   URL → controller
 controllers/              validation and business rules
@@ -121,7 +180,7 @@ Full field lists are in the frontend README ("API contract for the backend").
 npm test
 ```
 
-Runs 26 end-to-end tests against a real database: categories, products, photo upload, orders (including 10 at once),
+Needs Node 18+ (the server itself runs on 16). Runs 26 end-to-end tests against a real database: categories, products, photo upload, orders (including 10 at once),
 the BCV rate (with a saved copy of the real BCV page, plus "site down" and "page changed"), CORS and errors.
 It **creates and drops a database called `coffee_palace_test`**, using `DB_USER` / `DB_PASSWORD` from `.env`
 (XAMPP's root works). It never touches `coffee_palace`.

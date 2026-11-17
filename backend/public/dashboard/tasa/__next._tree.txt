@@ -1,0 +1,9 @@
+:HL["/_next/static/chunks/1ip5yrapigilh.css","style"]
+:HL["/_next/static/chunks/2dbz7qgfyac7n.css","style"]
+:HC["/",""]
+:HL["/_next/static/chunks/2c4cnbfgagra2.css","style"]
+:HL["/_next/static/chunks/3xxvrt_xz0ti2.css","style"]
+3:[["children",{"s":"__PAGE__","h":160}]]
+2:[["children",{"s":"tasa","h":96,"c":"$Q3"}]]
+1:[["children",{"s":"dashboard","h":96,"c":"$Q2"}]]
+0:{"b":"OgHZxRo7DXqXcLudAKgwt","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

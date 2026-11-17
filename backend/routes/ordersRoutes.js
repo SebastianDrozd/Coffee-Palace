@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { ah } from "../utils/asyncHandler.js";
 import * as orders from "../controllers/ordersController.js";
 
 const router = Router();
 
-router.get("/", orders.list);
-router.post("/", orders.create);
-router.patch("/:id/status", orders.setStatus);
+router.get("/", ah(orders.list));
+router.post("/", ah(orders.create));
+router.patch("/:id/status", ah(orders.setStatus));
 
 export default router;

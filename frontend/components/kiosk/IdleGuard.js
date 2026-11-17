@@ -13,7 +13,7 @@ const ACTIVITY_EVENTS = ["pointerdown", "keydown", "wheel", "touchmove"];
 
 // Sends the tablet back to the start screen when someone walks away mid-order.
 export default function IdleGuard() {
-  const pathname = usePathname();
+  const pathname = usePathname().replace(/(.)\/$/, "$1"); // "/order/" and "/order" are the same page
   const router = useRouter();
   const { clear } = useCart();
   const enabled = WATCHED_PATHS.includes(pathname);

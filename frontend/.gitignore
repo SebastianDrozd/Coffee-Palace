@@ -41,4 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# set aside by npm run build:static while it runs
+/.static-build-api-stash
+
 .vercel
